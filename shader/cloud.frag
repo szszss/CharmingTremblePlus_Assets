@@ -1,14 +1,9 @@
+#version 120
+
+uniform vec3      iResolution;
+uniform float     iGlobalTime;
+uniform sampler2D iChannel0;
 #ifdef FULL_PROCEDURAL
-
-uniform vec3      iResolution;           // viewport resolution (in pixels)
-uniform float     iGlobalTime;           // shader playback time (in seconds)
-uniform float     iChannelTime[4];       // channel playback time (in seconds)
-uniform vec3      iChannelResolution[4]; // channel resolution (in pixels)
-uniform vec4      iMouse;                // mouse pixel coords. xy: current (if MLB down), zw: click
-uniform samplerXX iChannel0..3;          // input channel. XX = 2D/Cube
-uniform vec4      iDate;                 // (year, month, day, time in seconds)
-uniform float     iSampleRate;           // sound sample rate (i.e., 44100)
-
 // hash based 3d value noise
 float hash( float n )
 {
@@ -103,7 +98,7 @@ vec4 raymarch( in vec3 ro, in vec3 rd )
 	return clamp( sum, 0.0, 1.0 );
 }
 
-void main(void)
+void main()
 {
 	vec2 q = gl_FragCoord.xy / iResolution.xy;
     vec2 p = -1.0 + 2.0*q;
